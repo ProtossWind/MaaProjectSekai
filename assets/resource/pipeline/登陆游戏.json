@@ -1,0 +1,131 @@
+{
+    "启动游戏": {
+        "action": "StartApp",
+        "package": "com.sega.pjsekai",
+        "post_delay": 5000,
+        "next": [
+            "登录游戏"
+        ]
+    },
+    "登录游戏": {
+        "recognition": "TemplateMatch",
+        "template": "Logo.png",
+        "action": "Click",
+        "next": [
+            "下载数据",
+            "领取奖励",
+            "关闭公告",
+            "游戏主页"
+        ],
+        "interrupt": [
+            "登录失败"
+        ]
+    },
+    "下载数据": {
+        "recognition": "TemplateMatch",
+        "template": "下载按钮.png",
+        "action": "Click",
+        "next": [
+            "等待数据下载",
+            "领取奖励",
+            "关闭公告",
+            "游戏主页"
+        ]
+    },
+    "等待数据下载": {
+        "recognition": "OCR",
+        "expected": "ダウンロード中",
+        "next": [
+            "等待数据下载",
+            "领取奖励",
+            "关闭公告",
+            "游戏主页"
+        ]
+    },
+    "领取奖励": {
+        "next": [
+            "领取奖励",
+            "关闭公告",
+            "游戏主页"
+        ]
+    },
+    "关闭公告": {
+        "recognition": "TemplateMatch",
+        "template": "公告关闭键.png",
+        "action": "Click",
+        "next": [
+            "关闭公告",
+            "游戏主页"
+        ]
+    },
+    "登录失败": {
+        "recognition": "OCR",
+        "roi": [0,200,1280,300],
+        "expected": "ロ[ブグ]インに失敗しました。",
+        "action": "Click",
+        "target": [279,482,788,175],
+        "next": [
+            "登录页引继"
+        ]
+    },
+    "登录页引继": {
+        "recognition": "TemplateMatch",
+        "template": "登录页菜单.png",
+        "action": "Click",
+        "next": [
+            "引继数据"
+        ]
+    },
+    "引继数据": {
+        "recognition": "OCR",
+        "expected": "データ引き継[ぎき]",
+        "action": "Click",
+        "next": [
+            "GooglePlay引继"
+        ]
+    },
+    "GooglePlay引继": {
+        "recognition": "OCR",
+        "expected": "GooglePlayで連携",
+        "action": "Click",
+        "next": [
+            "登录GooglePlay",
+            "确认连携"
+        ]
+    },
+    "登录GooglePlay": {
+        "recognition": "TemplateMatch",
+        "template": "登录GooglePlay.png",
+        "action": "Click",
+        "next": [
+            "确认连携"
+        ]
+    },
+    "确认连携": {
+        "recognition": "TemplateMatch",
+        "template": "确认连携.png",
+        "action": "Click"
+    },
+    "连携完成": {
+        "recognition": "OCR",
+        "expected": "プレイヤーデータの連携が完了しました",
+        "action": "Click",
+        "target": [907,438,235,218],
+        "next": [
+            "关闭登录菜单"
+        ]
+    },
+    "关闭登录菜单": {
+        "recognition": "TemplateMatch",
+        "template": "菜单关闭键.png",
+        "action": "Click",
+        "next": [
+            "关闭登录菜单",
+            "登录页"
+        ]
+    },
+    "登录页": {
+        "recognition": "TemplateMatch",
+        "template": "Logo.png"
+    }
+}

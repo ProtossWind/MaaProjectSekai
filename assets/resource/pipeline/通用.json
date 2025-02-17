@@ -1,0 +1,14 @@
+{
+    "返回主页": {
+
+    },
+    "游戏主页": {
+        "recognition": "TemplateMatch",
+        "template": "Live.png"
+    },
+    "切换世界": {
+        "recognition": "TemplateMatch",
+        "template": "切换世界.png",
+        "action": "Click"
+    }
+}
