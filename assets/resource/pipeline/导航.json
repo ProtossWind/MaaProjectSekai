@@ -4,8 +4,17 @@
             "游戏主页"
         ],
         "interrupt": [
-            "从菜单返回主页"
+            "Tips",
+            "返回上级"
         ]
+    },
+    "Tips": {
+        "recognition": "TemplateMatch",
+        "template": "Tips.png"
+    },
+    "返回上级": {
+        "action": "Key",
+        "key": 4
     },
     "从菜单返回主页": {
         "recognition": "TemplateMatch",
@@ -95,6 +104,14 @@
             "黑屏等待"
         ]
     },
+    "前往歌曲选择": {
+        "recognition": "TemplateMatch",
+        "template": "Live.png",
+        "action": "Click",
+        "next": [
+            "单人歌曲"
+        ]
+    },
     "黑屏等待": {
         "recognition": "ColorMatch",
         "upper": [0, 0, 34],
@@ -102,5 +119,4 @@
         "count": 100000,
         "post_wait_freezes": 500
     }
-    
 }

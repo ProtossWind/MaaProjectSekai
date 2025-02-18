@@ -1,0 +1,197 @@
+{
+    "单人歌曲": {
+        "recognition": "OCR",
+        "expected": "ひとりでライブ",
+        "roi": [593,193,355,188],
+        "pre_wait_freezes": 1000,
+        "action": "Click",
+        "next": [
+            "选择歌单"
+        ],
+        "interrupt": [
+            "向下滚动歌单"
+        ]
+    },
+    "向下滚动歌单": {
+        "action": "Swipe",
+        "begin": [60,400,10,10],
+        "end": [60,200,10,10]
+    },
+    "选择歌单": {
+        "recognition": "OCR",
+        "expected": "自動打歌",
+        "roi": [0,15,162,695],
+        "action": "Click",
+        "next": [
+            "Master难度",
+            "Expert难度"
+        ]
+    },
+    "Master难度": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "歌曲难度\\Master.png",
+            "歌曲难度\\Master_selected.png"
+        ],
+        "action": "Click",
+        "target_offset": [15,-55,-25,20],
+        "next": [
+            "确认选择"
+        ]
+    },
+    "Expert难度": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "歌曲难度\\Expert.png",
+            "歌曲难度\\Expert_selected.png"
+        ],
+        "action": "Click",
+        "target_offset": [15,-55,-25,20],
+        "next": [
+            "确认选择"
+        ]
+    },
+    "确认选择": {
+        "recognition": "OCR",
+        "expected": "[決决]定",
+        "roi": [855,498,308,178],
+        "action": "Click",
+        "next": [
+            "确认自动打开",
+            "无剩余体力"
+        ],
+        "interrupt": [
+            "打开自动"
+        ]
+    },
+    "确认自动打开": {
+        "recognition": "TemplateMatch",
+        "template": "Auto_on.png",
+        "next": [
+            "选择体力设置"
+        ]
+    },
+    "打开自动": {
+        "recognition": "TemplateMatch",
+        "template": "Auto_off.png",
+        "action": "Click"
+    },
+    "无剩余体力": {
+        "recognition": "OCR",
+        "expected": "消費する必要があります",
+        "roi": [158,280,961,157]
+    },
+    "选择体力设置": {
+        "recognition": "TemplateMatch",
+        "template": "体力设置.png",
+        "action": "Click",
+        "next": [
+            "体力符合要求"
+        ],
+        "interrupt": [
+            "体力大于要求",
+            "体力小于要求"
+        ]
+    },
+    "体力符合要求": {
+        "recognition": "TemplateMatch",
+        "template": "体力消耗\\5.png",
+        "roi": [552,216,180,94],
+        "threshold": 0.98,
+        "next": [
+            "确认体力设置"
+        ]
+    },
+    "体力大于要求": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "体力消耗\\10.png",
+            "体力消耗\\9.png",
+            "体力消耗\\8.png",
+            "体力消耗\\7.png",
+            "体力消耗\\6.png"
+        ],
+        "roi": [552,216,180,94],
+        "threshold": 0.98,
+        "next": [
+            "减少体力"
+        ]
+    },
+    "体力小于要求": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "体力消耗\\0.png",
+            "体力消耗\\1.png",
+            "体力消耗\\2.png",
+            "体力消耗\\3.png",
+            "体力消耗\\4.png"
+        ],
+        "roi": [552,216,180,94],
+        "threshold": 0.98,
+        "next": [
+            "增加体力"
+        ]
+    },
+    "减少体力": {
+        "recognition": "TemplateMatch",
+        "template": "减少体力.png",
+        "action": "Click"
+    },
+    "增加体力": {
+        "recognition": "TemplateMatch",
+        "template": "增加体力.png",
+        "action": "Click"
+    },
+    "确认体力设置": {
+        "recognition": "OCR",
+        "expected": "[決决]定",
+        "roi": [591,565,339,155],
+        "action": "Click",
+        "next": [
+            "开始歌曲"
+        ]
+    },
+    "开始歌曲": {
+        "recognition": "TemplateMatch",
+        "template": "开始歌曲.png",
+        "action": "Click",
+        "post_delay": 120000,
+        "next": [
+            "歌曲中"
+        ]
+    },
+    "歌曲中": {
+        "post_delay": 5000,
+        "next": [
+            "分数结算",
+            "歌曲中"
+        ]
+    },
+    "分数结算": {
+        "recognition": "OCR",
+        "model": "en_us",
+        "expected": "SCORERANK",
+        "roi": [992,403,232,130],
+        "action": "Click",
+        "next": [
+            "下一页"
+        ]
+    },
+    "下一页": {
+        "recognition": "OCR",
+        "expected": [
+            "選択へ",
+            "次へ"
+        ],
+        "roi": [752,584,528,136],
+        "action": "Click",
+        "post_wait_freezes": 1000,
+        "next": [
+            "下一页",
+            "确认选择"
+        ],
+        "interrupt": [
+            "返回上级"
+        ]
+    }
+}
