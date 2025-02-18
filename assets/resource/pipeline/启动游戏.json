@@ -2,23 +2,46 @@
     "启动游戏": {
         "action": "StartApp",
         "package": "com.sega.pjsekai",
-        "post_delay": 5000,
+        "post_delay": 10000,
         "next": [
-            "登录游戏"
+            "登录游戏",
+            "白屏等待"
+        ]
+    },
+    "白屏等待": {
+        "recognition": "ColorMatch",
+        "upper": [255, 255, 255],
+        "lower": [255, 255, 255],
+        "count": 500000,
+        "next": [
+            "登录游戏",
+            "白屏等待"
         ]
     },
     "登录游戏": {
         "recognition": "TemplateMatch",
-        "template": "Logo.png",
+        "template": "TAP TO START.png",
         "action": "Click",
         "next": [
+            "登录失败",
             "下载数据",
             "领取奖励",
             "关闭公告",
-            "游戏主页"
-        ],
-        "interrupt": [
-            "登录失败"
+            "游戏主页",
+            "转圈等待"
+        ]
+    },
+    "转圈等待": {
+        "recognition": "TemplateMatch",
+        "template": "转圈等待.png",
+        "timeout": 60000,
+        "next": [
+            "登录失败",
+            "下载数据",
+            "领取奖励",
+            "关闭公告",
+            "游戏主页",
+            "转圈等待"
         ]
     },
     "下载数据": {
@@ -43,6 +66,9 @@
         ]
     },
     "领取奖励": {
+        "recognition": "OCR",
+        "expected": "報酬を獲得しました",
+        "action": "Click",
         "next": [
             "领取奖励",
             "关闭公告",
@@ -52,6 +78,7 @@
     "关闭公告": {
         "recognition": "TemplateMatch",
         "template": "公告关闭键.png",
+        "threshold": 0.97,
         "action": "Click",
         "next": [
             "关闭公告",
@@ -70,7 +97,7 @@
     },
     "登录页引继": {
         "recognition": "TemplateMatch",
-        "template": "登录页菜单.png",
+        "template": "菜单键.png",
         "action": "Click",
         "next": [
             "引继数据"
@@ -121,11 +148,7 @@
         "action": "Click",
         "next": [
             "关闭登录菜单",
-            "登录页"
+            "登录游戏"
         ]
-    },
-    "登录页": {
-        "recognition": "TemplateMatch",
-        "template": "Logo.png"
     }
 }

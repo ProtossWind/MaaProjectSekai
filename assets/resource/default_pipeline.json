@@ -1,0 +1,9 @@
+{
+    "Default": {
+        "post_delay": 500
+    },
+    "TemplateMatch": {
+        "recognition": "TemplateMatch",
+        "order_by": "Score"
+    }
+}

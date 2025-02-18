@@ -1,0 +1,106 @@
+{
+    "返回主页": {
+        "next": [
+            "游戏主页"
+        ],
+        "interrupt": [
+            "从菜单返回主页"
+        ]
+    },
+    "从菜单返回主页": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "菜单键.png",
+            "动森/菜单键.png"
+        ],
+        "action": "Click",
+        "next": [
+            "前往主页"
+        ]
+    },
+    "前往主页": {
+        "recognition": "OCR",
+        "expected": "ホーム",
+        "action": "Click",
+        "post_wait_freezes": 500
+    },
+    "游戏主页": {
+        "recognition": "TemplateMatch",
+        "template": "Live.png"
+    },
+    "切换世界": {
+        "next": [
+            "前往世界地图"
+        ],
+        "interrupt": [
+            "返回主页"
+        ]
+    },
+    "前往世界地图": {
+        "recognition": "TemplateMatch",
+        "template": "世界地图.png",
+        "action": "Click"
+    },
+    "前往虚拟世界": {
+        "recognition": "TemplateMatch",
+        "template": "前往虚拟世界.png",
+        "action": "Click",
+        "post_wait_freezes": 500
+    },
+    "前往现实世界": {
+        "recognition": "TemplateMatch",
+        "template": "前往现实世界.png",
+        "action": "Click",
+        "post_wait_freezes": 500
+    },
+    "音乐商店": {
+        "next": [
+            "前往音乐商店"
+        ],
+        "interrupt": [
+            "前往现实世界",
+            "向右下滑动"
+        ]
+    },
+    "十字路口": {
+        "next": [
+            "前往十字路口"
+        ],
+        "interrupt": [
+            "前往现实世界",
+            "向左滑动"
+        ]
+    },
+    "前往音乐商店": {
+        "recognition": "OCR",
+        "expected": "音楽シ[ヨョ]ップ",
+        "action": "Click",
+        "target_offset": [0,-100,0,50],
+        "next": [
+            "兑换免费歌曲"
+        ],
+        "interrupt": [
+            "黑屏等待"
+        ]
+    },
+    "前往十字路口": {
+        "recognition": "OCR",
+        "expected": "ス[ワク]ランブル交差点",
+        "action": "Click",
+        "target_offset": [0,-100,0,50],
+        "next": [
+            "领取免费奖励"
+        ],
+        "interrupt": [
+            "黑屏等待"
+        ]
+    },
+    "黑屏等待": {
+        "recognition": "ColorMatch",
+        "upper": [0, 0, 34],
+        "lower": [0, 0, 0],
+        "count": 100000,
+        "post_wait_freezes": 500
+    }
+    
+}

@@ -1,0 +1,120 @@
+{
+    "兑换免费歌曲": {
+        "recognition": "TemplateMatch",
+        "template": "Live.png",
+        "next": [
+            "选择音乐商店"
+        ],
+        "interrupt": [
+            "向右滑动"
+        ]
+    },
+    "选择音乐商店": {
+        "recognition": "FeatureMatch",
+        "template": "音乐商店键.png",
+        "detector": "BRISK",
+        "action": "Click",
+        "post_wait_freezes": 1000,
+        "next": [
+            "选择歌曲",
+            "无未兑换歌曲"
+        ]
+    },
+    "选择歌曲": {
+        "recognition": "ColorMatch",
+        "upper": [255, 255, 255],
+        "lower": [255, 255, 255],
+        "connected": true,
+        "count": 16000,
+        "action": "Click",
+        "next": [
+            "观看免费歌曲广告",
+            "无免费兑换机会"
+        ]
+    },
+    "观看免费歌曲广告": {
+        "recognition": "OCR",
+        "expected": "ＣＭ視聴で交換",
+        "action": "Click",
+        "next": [
+            "开始观看"
+        ]
+    },
+    "领取免费奖励": {
+        "recognition": "TemplateMatch",
+        "template": "Live.png",
+        "next": [
+            "选择广告观看处"
+        ],
+        "interrupt": [
+            "向右滑动"
+        ]
+    },
+    "选择广告观看处": {
+        "recognition": "TemplateMatch",
+        "template": "广告键.png",
+        "action": "Click",
+        "next": [
+            "全部奖励领取完毕"
+        ],
+        "interrupt": [
+            "观看道具奖励广告"
+        ]
+    },
+    "观看道具奖励广告": {
+        "recognition": "OCR",
+        "expected": "CM視聴",
+        "action": "Click",
+        "next": [
+            "开始观看"
+        ]
+    },
+    "开始观看": {
+        "recognition": "OCR",
+        "expected": "視聴開始",
+        "action": "Click",
+        "post_delay": 10000,
+        "rate_limit": 5000,
+        "timeout": 60000,
+        "next": [
+            "退出广告",
+            "点X退出"
+        ]
+    },
+    "退出广告": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "退出广告1.png",
+            "退出广告2.png"
+        ],
+        "action": "Click",
+        "next": [
+            "兑换完毕",
+            "退出广告",
+            "点X退出"
+        ]
+    },
+    "点X退出": {
+        "recognition": "OCR",
+        "expected": "[Xx×]",
+        "roi": [1200,0,80,80],
+        "action": "Click",
+        "next": [
+            "兑换完毕",
+            "退出广告",
+            "点X退出"
+        ]
+    },
+    "兑换完毕": {
+        "recognition": "OCR",
+        "expected": "しました",
+        "action": "Click",
+        "target": [279,482,788,175] 
+    },
+    "全部奖励领取完毕": {
+        "recognition": "TemplateMatch",
+        "template": "Live.png"
+    },
+    "无未兑换歌曲": {},
+    "无免费兑换机会": {}
+}

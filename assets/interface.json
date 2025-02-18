@@ -19,19 +19,26 @@
             "entry": "启动游戏"
         },
         {
-            "name": "看广告",
-            "entry": "返回主页",
+            "name": "兑换免费歌曲",
+            "entry": "切换世界",
             "pipeline_override": {
-                
+                "前往世界地图": {
+                    "next": [
+                        "音乐商店"
+                    ]
+                }
             }
         },
         {
-            "name": "参数任务",
-            "entry": "MyTask3",
-            "option": [
-                "任务选项1"
-            ],
-            "pipeline_override": {}
+            "name": "领取免费奖励",
+            "entry": "切换世界",
+            "pipeline_override": {
+                "前往世界地图": {
+                    "next": [
+                        "十字路口"
+                    ]
+                }
+            }
         }
     ],
     "option": {
@@ -41,7 +48,7 @@
                     "name": "文本1",
                     "pipeline_override": {
                         "OcrTask": {
-                            "text": "文本1"
+                            "expected": "文本1"
                         }
                     }
                 },
@@ -49,7 +56,7 @@
                     "name": "文本2",
                     "pipeline_override": {
                         "OcrTask": {
-                            "text": "文本2"
+                            "expected": "文本2"
                         }
                     }
                 }
