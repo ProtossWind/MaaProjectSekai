@@ -12,7 +12,6 @@
     "选择音乐商店": {
         "recognition": "FeatureMatch",
         "template": "音乐商店键.png",
-        "detector": "BRISK",
         "action": "Click",
         "post_wait_freezes": 1000,
         "next": [
@@ -44,7 +43,8 @@
         "recognition": "TemplateMatch",
         "template": "Live.png",
         "next": [
-            "选择广告观看处"
+            "选择广告观看处",
+            "全部奖励领取完毕"
         ],
         "interrupt": [
             "向右滑动"
@@ -52,12 +52,10 @@
     },
     "选择广告观看处": {
         "recognition": "TemplateMatch",
-        "template": "广告键.png",
+        "template": "广告键2.png",
+        "threshold": 0.9,
         "action": "Click",
         "next": [
-            "全部奖励领取完毕"
-        ],
-        "interrupt": [
             "观看道具奖励广告"
         ]
     },
@@ -73,36 +71,96 @@
         "recognition": "OCR",
         "expected": "視聴開始",
         "action": "Click",
-        "post_delay": 10000,
-        "rate_limit": 5000,
-        "timeout": 60000,
+        "post_delay": 5000,
+        "rate_limit": 1000,
+        "timeout": 120000,
         "next": [
-            "退出广告",
-            "点X退出"
+            "点右上X",
+            "点左上X",
+            "退出按钮识图",
+            "返回游戏"
         ]
     },
-    "退出广告": {
+    "退出按钮识图": {
         "recognition": "TemplateMatch",
+        "roi": [1130,0,150,150],
         "template": [
-            "退出广告1.png",
-            "退出广告2.png"
+            "退出广告/退出广告-白双三角.png",
+            "退出广告/退出广告-浅灰》.png",
+            "退出广告/退出广告-花底》.png",
+            "退出广告/退出广告-白x.png",
+            "退出广告/退出广告-白x绿底.png",
+            "退出广告/退出广告-黑x白底.png",
+            "退出广告/退出广告-黑x灰底.png"
         ],
         "action": "Click",
+        "timeout": 120000,
         "next": [
             "兑换完毕",
-            "退出广告",
-            "点X退出"
+            "点右上X",
+            "点左上X",
+            "退出按钮识图",
+            "返回游戏",
+            "确认未看完"
         ]
     },
-    "点X退出": {
+    "点右上X": {
         "recognition": "OCR",
-        "expected": "[Xx×]",
-        "roi": [1200,0,80,80],
+        "expected": "\\b[Xx×]\\b",
+        "model": "en_us",
+        "roi": [1183,0,97,115],
         "action": "Click",
+        "timeout": 120000,
         "next": [
             "兑换完毕",
-            "退出广告",
-            "点X退出"
+            "点右上X",
+            "点左上X",
+            "退出按钮识图",
+            "返回游戏",
+            "确认未看完"
+        ]
+    },
+    "点左上X": {
+        "recognition": "OCR",
+        "expected": "\\b[Xx×]\\b",
+        "model": "en_us",
+        "roi": [0,0,97,115],
+        "action": "Click",
+        "timeout": 120000,
+        "next": [
+            "兑换完毕",
+            "点右上X",
+            "点左上X",
+            "退出按钮识图",
+            "返回游戏",
+            "确认未看完"
+        ]
+    },
+    "返回游戏": {
+        "recognition": "OCR",
+        "expected": "Google Play",
+        "model": "en_us",
+        "roi": [0,0,265,150],
+        "action": "StartApp",
+        "package": "com.sega.pjsekai",
+        "timeout": 120000,
+        "next": [
+            "兑换完毕",
+            "点右上X",
+            "点左上X",
+            "退出按钮识图",
+            "返回游戏",
+            "确认未看完"
+        ]
+    },
+    "确认未看完": {
+        "recognition": "OCR",
+        "expected": "[O0]K",
+        "model": "en_us",
+        "roi": [518,356,248,135],
+        "action": "Click",
+        "next": [
+            "观看道具奖励广告"
         ]
     },
     "兑换完毕": {
@@ -112,9 +170,15 @@
         "target": [279,482,788,175] 
     },
     "全部奖励领取完毕": {
-        "recognition": "TemplateMatch",
-        "template": "Live.png"
+        "recognition": "FeatureMatch",
+        "template": "无广告.png",
+        "count": 10,
+        "action": "StopTask"
     },
-    "无未兑换歌曲": {},
-    "无免费兑换机会": {}
+    "无未兑换歌曲": {
+        "action": "StopTask"
+    },
+    "无免费兑换机会": {
+        "action": "StopTask"
+    }
 }

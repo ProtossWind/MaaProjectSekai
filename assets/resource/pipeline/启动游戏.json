@@ -2,19 +2,19 @@
     "启动游戏": {
         "action": "StartApp",
         "package": "com.sega.pjsekai",
-        "post_delay": 10000,
+        "post_delay": 5000,
         "next": [
             "登录游戏",
-            "白屏等待"
-        ]
-    },
-    "白屏等待": {
-        "recognition": "ColorMatch",
-        "upper": [255, 255, 255],
-        "lower": [255, 255, 255],
-        "count": 500000,
-        "next": [
-            "登录游戏",
+            "登录失败",
+            "转圈等待",
+            "等待Tips",
+            "下载数据",
+            "等待数据下载",
+            "领取奖励",
+            "关闭公告",
+            "游戏主页"
+        ],
+        "interrupt": [
             "白屏等待"
         ]
     },
@@ -23,13 +23,15 @@
         "template": "TAP TO START.png",
         "action": "Click",
         "next": [
+            "登录游戏",
             "登录失败",
-            "下载数据",
+            "转圈等待",
             "等待Tips",
+            "下载数据",
+            "等待数据下载",
             "领取奖励",
             "关闭公告",
-            "游戏主页",
-            "转圈等待"
+            "游戏主页"
         ]
     },
     "转圈等待": {
@@ -37,13 +39,14 @@
         "template": "转圈等待.png",
         "timeout": 60000,
         "next": [
+            "转圈等待",
             "登录失败",
-            "下载数据",
             "等待Tips",
+            "下载数据",
+            "等待数据下载",
             "领取奖励",
             "关闭公告",
-            "游戏主页",
-            "转圈等待"
+            "游戏主页"
         ]
     },
     "下载数据": {
@@ -51,8 +54,9 @@
         "template": "下载按钮.png",
         "action": "Click",
         "next": [
-            "等待数据下载",
             "等待Tips",
+            "下载数据",
+            "等待数据下载",
             "领取奖励",
             "关闭公告",
             "游戏主页"
@@ -60,7 +64,7 @@
     },
     "等待数据下载": {
         "recognition": "OCR",
-        "expected": "ダウンロード中",
+        "expected": "ダウンロー[ドト]中",
         "next": [
             "等待数据下载",
             "等待Tips",
@@ -74,19 +78,66 @@
         "template": "Tips.png",
         "next": [
             "等待Tips",
+            "下载数据",
+            "等待数据下载",
             "领取奖励",
             "关闭公告",
             "游戏主页"
+        ],
+        "interrupt": [
+            "黑屏等待",
+            "白屏等待"
         ]
     },
     "领取奖励": {
         "recognition": "OCR",
         "expected": "報酬を獲得しました",
+        "roi": [435,354,400,225],
         "action": "Click",
         "next": [
             "领取奖励",
             "关闭公告",
             "游戏主页"
+        ],
+        "interrupt": [
+            "黑屏等待",
+            "白屏等待"
+        ]
+    },
+    "返回标题": {
+        "recognition": "OCR",
+        "expected": "タイトルへ戻ります",
+        "roi": [456,253,359,167],
+        "next": [
+            "确认返回标题",
+            "登录游戏",
+            "转圈等待",
+            "等待Tips",
+            "下载数据",
+            "等待数据下载"
+        ],
+        "interrupt": [
+            "黑屏等待",
+            "白屏等待"
+        ]
+    },
+    "确认返回标题": {
+        "recognition": "OCR",
+        "expected": "OK",
+        "model": "en_us",
+        "roi": [560,357,161,137],
+        "action": "Click",
+        "next": [
+            "确认返回标题",
+            "登录游戏",
+            "转圈等待",
+            "等待Tips",
+            "下载数据",
+            "等待数据下载"
+        ],
+        "interrupt": [
+            "黑屏等待",
+            "白屏等待"
         ]
     },
     "关闭公告": {
@@ -106,7 +157,17 @@
         "action": "Click",
         "target": [279,482,788,175],
         "next": [
-            "登录页引继"
+            "登录页引继",
+            "引继数据",
+            "从GooglePlay引继",
+            "登录GooglePlay",
+            "确认连携",
+            "连携完成",
+            "关闭登录菜单",
+            "登录游戏"
+        ],
+        "interrupt": [
+            "白屏等待"
         ]
     },
     "登录页引继": {
@@ -114,7 +175,12 @@
         "template": "菜单键.png",
         "action": "Click",
         "next": [
-            "引继数据"
+            "引继数据",
+            "从GooglePlay引继",
+            "登录GooglePlay",
+            "确认连携",
+            "连携完成",
+            "关闭登录菜单"
         ]
     },
     "引继数据": {
@@ -122,16 +188,26 @@
         "expected": "データ引き継[ぎき]",
         "action": "Click",
         "next": [
-            "GooglePlay引继"
+            "引继数据",
+            "从GooglePlay引继",
+            "登录GooglePlay",
+            "确认连携",
+            "连携完成",
+            "关闭登录菜单",
+            "登录游戏"
         ]
     },
-    "GooglePlay引继": {
+    "从GooglePlay引继": {
         "recognition": "OCR",
         "expected": "GooglePlayで連携",
         "action": "Click",
         "next": [
+            "从GooglePlay引继",
             "登录GooglePlay",
-            "确认连携"
+            "确认连携",
+            "连携完成",
+            "关闭登录菜单",
+            "登录游戏"
         ]
     },
     "登录GooglePlay": {
@@ -139,13 +215,23 @@
         "template": "登录GooglePlay.png",
         "action": "Click",
         "next": [
-            "确认连携"
+            "登录GooglePlay",
+            "确认连携",
+            "连携完成",
+            "关闭登录菜单",
+            "登录游戏"
         ]
     },
     "确认连携": {
         "recognition": "TemplateMatch",
         "template": "确认连携.png",
-        "action": "Click"
+        "action": "Click",
+        "next": [
+            "确认连携",
+            "连携完成",
+            "关闭登录菜单",
+            "登录游戏"
+        ]
     },
     "连携完成": {
         "recognition": "OCR",
@@ -153,7 +239,8 @@
         "action": "Click",
         "target": [907,438,235,218],
         "next": [
-            "关闭登录菜单"
+            "关闭登录菜单",
+            "登录游戏"
         ]
     },
     "关闭登录菜单": {

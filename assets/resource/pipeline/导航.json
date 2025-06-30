@@ -14,7 +14,8 @@
     },
     "返回上级": {
         "action": "Key",
-        "key": 4
+        "key": 4,
+        "post_delay": 1000
     },
     "从菜单返回主页": {
         "recognition": "TemplateMatch",
@@ -48,7 +49,18 @@
     "前往世界地图": {
         "recognition": "TemplateMatch",
         "template": "世界地图.png",
-        "action": "Click"
+        "action": "Click",
+        "next": [
+            "确认位于世界地图",
+            "前往世界地图"
+        ]
+    },
+    "确认位于世界地图": {
+        "recognition": "TemplateMatch",
+        "template": [
+            "前往虚拟世界.png",
+            "前往现实世界.png"
+        ]
     },
     "前往虚拟世界": {
         "recognition": "TemplateMatch",
@@ -67,6 +79,7 @@
             "前往音乐商店"
         ],
         "interrupt": [
+            "前往世界地图",
             "前往现实世界",
             "向右下滑动"
         ]
@@ -76,6 +89,7 @@
             "前往十字路口"
         ],
         "interrupt": [
+            "前往世界地图",
             "前往现实世界",
             "向左滑动"
         ]
@@ -104,19 +118,27 @@
             "黑屏等待"
         ]
     },
-    "前往歌曲选择": {
+    "前往Live": {
         "recognition": "TemplateMatch",
         "template": "Live.png",
         "action": "Click",
         "next": [
-            "单人歌曲"
+            "单人歌曲",
+            "前往Live"
         ]
+    },
+    "白屏等待": {
+        "recognition": "ColorMatch",
+        "upper": [255, 255, 255],
+        "lower": [255, 255, 255],
+        "count": 500000,
+        "post_wait_freezes": 300
     },
     "黑屏等待": {
         "recognition": "ColorMatch",
         "upper": [0, 0, 34],
         "lower": [0, 0, 0],
         "count": 100000,
-        "post_wait_freezes": 500
+        "post_wait_freezes": 300
     }
 }
